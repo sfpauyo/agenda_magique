@@ -8,8 +8,8 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=200, blank=True)
     email =models.CharField(max_length=200, blank=True)
-    term_date = models.DateField('date de terme', blank=True)
-    birth_date = models.DateField("date d'accouchement", blank=True)
+    term_date = models.DateField('date de terme', blank=True, null=True)
+    birth_date = models.DateField("date d'accouchement", blank=True, null=True)
 
     def __str__(self):
         if self.first_name is None:
@@ -48,4 +48,4 @@ class Appointment(models.Model):
     type = models.IntegerField(choices=TYPE_STATUS, default=perinee_status)
 
     def __str__(self):
-        return str(self.date).split(" ")[0] + " " + self.patient.last_name +" "+ self.type
+        return str(self.date).split(" ")[0] + " " + self.patient.last_name +" "+ str(self.type)
